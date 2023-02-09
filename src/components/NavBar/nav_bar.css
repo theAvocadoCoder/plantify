@@ -1,0 +1,32 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.header__container {
+  margin-top: 5em;
+}
+
+.sect__container {
+  width: 90%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.header__flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__flex .main__logoContainer {
+  width: 5rem;
+}/*# sourceMappingURL=nav_bar.css.map */
