@@ -1,53 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
-import LinearProgress from "@mui/material/LinearProgress";
-import Typography from "@mui/material/Typography";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import { createTheme } from "@mui/material/styles";
-import styles from "../../components/ProgressBar/progress_bar.module.scss";
-import { ThemeProvider } from "@emotion/react";
+import LinearProgressBar from "./component/LinearProgressBar";
 
-const index = (props) => {
+const Index = () => {
+	const [progress, setProgress] = useState(10);
 
-    const theme = createTheme({
-			palette: {
-				primary: {
-					main: "#00BFA5",
-				},
-			},
-		});
-
-    index.propTypes = {
-        value: PropTypes.number.isRequired
-    }
+	useEffect(() => {
+		const timer = setInterval(() => {
+			setProgress((prevProgress) =>
+				prevProgress >= 100 ? 10 : prevProgress + 10
+			);
+        }, 800);
+        return () => {
+            clearInterval(timer);
+        };
+	}, []);
 
 	return (
-		<div className={styles.sect__container}>
-			<Box className={styles.progress__container}>
-				<Box className={styles.progress__line}>
-					<ThemeProvider theme={theme}>
-						<LinearProgress
-							variant="determinate"
-							{...props}
-							className={styles.linear__bar}
-						/>
-					</ThemeProvider>
-					{/* <LinearProgress
-                        variant="determinate"
-                        {...props}
-                        style={LinearProgress}
-                        className={styles.linear__bar}
-					/> */}
-				</Box>
-				<Box className={styles.progress__percent}>
-					<Typography
-						variant="body2"
-						className={styles.percent__number}
-					>{`${Math.round(props.value)}%`}</Typography>
-				</Box>
+		<div>
+			<Box sx={{ width: "100%" }}>
+                <LinearProgressBar value={progress} />
 			</Box>
 		</div>
 	);
 };
 
-export default index;
+export default Index;
