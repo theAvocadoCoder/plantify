@@ -1,8 +1,8 @@
-.sect__container {
-    width: 90%;
-    max-width: 1024px;
-    margin: 0 auto;
-}
+// .sect__container {
+//     width: 90%;
+//     max-width: 1024px;
+//     margin: 0 auto;
+// }
 
 .progress__container {
     display: flex;
@@ -14,12 +14,8 @@
     }
 
     .linear__bar {
-        height: 10px;
+        height: 8px;
         border-radius: .5rem;
-        background: linear-gradient(red);
-        // color: #00BFA5;
-
-        // padding: .3em 0;
     }
 
     // .progress__percent {
@@ -29,7 +25,20 @@
     .percent__number {
         color: #6B7280;
         font-weight: 500;
-        font-size: 1.25rem;
-        line-height: 1.5rem;
+        font-size: .625rem;
+        line-height: .8rem;
+    }
+}
+
+@media (min-width: 780px) {
+    .progress__container {
+        .linear__bar {
+            height: 10px;
+        }
+
+        .percent__number {
+            font-size: 1.25rem;
+            line-height: 1.5rem;
+        }
     }
 }
