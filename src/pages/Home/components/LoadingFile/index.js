@@ -1,6 +1,6 @@
 import React from "react"
 import CloseIcon from "@mui/icons-material/Close";
-import ProgressBar from "../../../../components/ProgressBar/Index"
+import ProgressBar from "../../../../components/ProgressBar"
 import styles from "../LoadingFile/loading_file.module.scss";
 import plantImg from "../../../../assets/plant-icon.png"
 
