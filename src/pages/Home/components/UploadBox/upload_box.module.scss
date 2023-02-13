@@ -2,6 +2,7 @@
 
 .upload-box {
   display: flex;
+  align-items: center;
   flex-direction: column;
 
   >{
@@ -11,12 +12,14 @@
       border: 3px dashed #D1D5DB;
       border-radius: 16px;
       align-items: center;
+      width: clamp(310px, 70%, 1200px);
       gap: 24px; 
       font-size: 24px;
       line-height: 29px;
       padding: 70px 0;
       margin: 80px 120px;
       text-align: center;
+      
       @include devices(tablet) {
         margin: 24px;
         padding: 80px 0;
