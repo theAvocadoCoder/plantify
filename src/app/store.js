@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import uploadFileReducer from "../pages/Home/components/uploadFileSlice";
+import uploadFileReducer from "../pages/Home/slices/uploadFileSlice";
 
 
 export const store = configureStore({
   reducer: {
-    file: uploadFileReducer,
+    fileReducer: uploadFileReducer,
   },
 });
