@@ -27,6 +27,10 @@ const UploadBox = () => {
 
   return (
     <div className={style["upload-box"]}>
+      <div className={style["mobile-text-div"]}>
+        <h1>Plant Identifier</h1>
+        <p>Identify your plants instantly using Machine Learning</p>
+      </div>
       <div onDragOver={handleDragOver} onDrop={handleDrop}>
         <img src={uploadIcon} alt="" />
         <input type="file" id="plant-image" hidden name="plant-image" onChange={handleOnSelectFile} />
