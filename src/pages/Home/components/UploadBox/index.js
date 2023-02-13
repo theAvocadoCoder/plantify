@@ -1,14 +1,11 @@
 import React from "react";
 import style from "./upload_box.module.scss";
 import uploadIcon from "../../assets/upload-icon.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { setFile } from "../uploadFileSlice";
+import { useDispatch } from "react-redux";
+import { setFile, setName, setSize } from "../../slices/uploadFileSlice";
 
 const UploadBox = () => {
-  const fileState = useSelector((state) => (state.file));
   const dispatch = useDispatch();
-
-
 
   function handleDragOver (event) {
     event.preventDefault();
@@ -23,10 +20,19 @@ const UploadBox = () => {
     const { files } = event.target;
     const localImageURL = window.URL.createObjectURL(files[0]);
     dispatch(setFile(localImageURL));
+    const convertSize = (numInBytes) => {
+      if (numInBytes/1024 <= 1024) {
+        return `${Math.floor(numInBytes/1024)}KB`;
+      } else {
+        return `${Math.floor(numInBytes/1024/1024)}MB`
+      }
+    }
+    dispatch(setSize(convertSize(files[0].size)));
+    dispatch(setName(files[0].name));
   }
 
   return (
-    <div className={style["upload-box"]}>
+    <div className={style["upload-box"]} onDragOver={handleDragOver} onDrop={handleDragOver}>
       <div className={style["mobile-text-div"]}>
         <h1>Plant Identifier</h1>
         <p>Identify your plants instantly using Machine Learning</p>
@@ -35,11 +41,11 @@ const UploadBox = () => {
         <img src={uploadIcon} alt="" />
         <input type="file" id="plant-image" hidden name="plant-image" onChange={handleOnSelectFile} />
         <p>
-          <button disabled={fileState.file ? false : true}><label htmlFor="plant-image">Choose</label></button>
+          <button><label htmlFor="plant-image">Choose</label></button>
            &nbsp;a file or drag and drop to upload
         </p>
         <p>Upload JPG, PNG or PDF File, max 10MB</p>
-        <button disabled={fileState.file ? false : true}><label htmlFor="plant-image">Choose Files</label></button>
+        <button><label htmlFor="plant-image">Choose Files</label></button>
       </div>
     </div>
   )

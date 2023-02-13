@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import LinearProgressBar from "./component/LinearProgressBar";
 
-const Index = () => {
-	const [progress, setProgress] = useState(10);
+const Index = ({ progress, setProgress }) => {
 
 	useEffect(() => {
 		const timer = setInterval(() => {
 			setProgress((prevProgress) =>
-				prevProgress >= 100 ? 10 : prevProgress + 10
+				prevProgress >= 100 ? 100 : prevProgress + 10
 			);
-        }, 800);
+        }, 150);
         return () => {
             clearInterval(timer);
         };
-	}, []);
+	});
 
 	return (
 		<div>
