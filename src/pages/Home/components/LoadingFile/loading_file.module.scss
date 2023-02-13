@@ -1,17 +1,3 @@
-*,
-*::before,
-*::after {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	text-decoration: none;
-	list-style: none;
-}
-
-img {
-	max-width: 100%;
-}
-
 .sect__container {
     width: 90%;
     max-width: 1024px;
