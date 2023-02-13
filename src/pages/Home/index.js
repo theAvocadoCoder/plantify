@@ -6,12 +6,12 @@ import LoadingFile from "./components/LoadingFile";
 
 const Home = () => {
   return (
-    <>
+    <div>
       <NavBar />
       <UploadBox />
-      <FileLoaded />
       <LoadingFile />
-    </>
+      <FileLoaded />
+    </div>
   )
 }
 
