@@ -1,0 +1,38 @@
+@import "../../../../assets/mixins.scss";
+
+.file-loaded__div {
+
+  >{
+    div {
+      width: clamp(310px, 70%, 1200px);
+      margin: 80px 120px;
+      font-size: 32px;
+      line-height: 39px;
+    
+      @include devices(tablet) {
+        margin: 24px;
+        padding: 80px 0;
+        font-size: 16.0533px;
+        line-height: 19px;
+      }
+    }
+  }
+
+  img {
+    margin: 33px 0;
+    width: 320px;
+
+    @include devices(tablet) {
+      width: 160px;
+    }
+  }
+
+  .h3 {
+    color: #212531;
+  }
+
+  p:not(.h2):not(.h3) {
+    font-weight: 400;
+    color: #6B7280;
+  }
+}
