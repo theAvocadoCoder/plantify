@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeFile } from "../../slices/uploadFileSlice";
+import { fetchPlantDetails } from "../../slices/identifiedPlantSlice";
 import CloseIcon from "@mui/icons-material/Close";
 import ProgressBar from "../../../../components/ProgressBar"
 import styles from "../LoadingFile/loading_file.module.scss";
 import plantImg from "../../../../assets/plant-icon.png"
-import axios from "axios";
 
 const LoadingFile = () => {
 	const [progress, setProgress] = useState(10);
@@ -19,46 +19,10 @@ const LoadingFile = () => {
 		if (isIdentified) setIsIdentified(false);
 	}
 
-	async function makePostToPlantChecker() {
-		await axios
-			.post("https://api.plant.id/v2/identify", {
-				images: [file],
-				plant_details: [
-					"common_names",
-					"wiki_description",
-					"name_authority",
-					"url",
-					"watering",
-					"wiki_image"
-				]
-			}, {
-				headers: {
-					"Api-Key": "QVEdLt0ooP7VIzmPSZo3gXz8Y32IsBLyn2z1fSpjxIl9m2sRGZ"
-				}
-			})
-			.then((response) => {
-				setIsIdentified(true);
-				console.log("this is the response data: ", response.data.suggestion?.length > 1 ? response.data.suggestion[0] : response.data);
-				console.log("this is the request: ", response.request);
-			})
-			.catch((error) => {
-				if (error.response) {
-					console.log("error response data: ", error.response.data);
-					console.log("error response status: ", error.response.status);
-					console.log("error response headers: ", error.response.headers);
-				} else if (error.request) {
-					console.log("error request: ", error.request);
-				} else {
-					console.log('error message: ', error.message);
-				}
-				console.log("error config: ", error.config);
-			})
-
-	}
-
 	function handleIdentifyPlant() {
 		if (file) {
-			makePostToPlantChecker();
+			dispatch(fetchPlantDetails(file));
+			setIsIdentified(true);
 		}
 	}
 
