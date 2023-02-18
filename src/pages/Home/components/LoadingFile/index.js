@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeFile } from "../../slices/uploadFileSlice";
+import { fetchPlantDetails } from "../../slices/identifiedPlantSlice";
 import CloseIcon from "@mui/icons-material/Close";
 import ProgressBar from "../../../../components/ProgressBar"
 import styles from "../LoadingFile/loading_file.module.scss";
@@ -8,12 +9,21 @@ import plantImg from "../../../../assets/plant-icon.png"
 
 const LoadingFile = () => {
 	const [progress, setProgress] = useState(10);
+	const [isIdentified, setIsIdentified] = useState(false);
 	const { file, name, size } = useSelector((state) => state.fileReducer);
 	const dispatch = useDispatch();
 
 	function handleCloseFile() {
 		dispatch(closeFile());
 		setProgress(10);
+		if (isIdentified) setIsIdentified(false);
+	}
+
+	function handleIdentifyPlant() {
+		if (file) {
+			dispatch(fetchPlantDetails(file));
+			setIsIdentified(true);
+		}
 	}
 
   return (
@@ -56,9 +66,9 @@ const LoadingFile = () => {
 							</div>
 						) : (<></>)
 					}
-					<div className={styles.bottom__layout}>
+					<div className={`${styles.bottom__layout} ${isIdentified | progress < 100 ? styles.hidden : ""}`}>
 						<button className={styles.btn__cancel} onClick={handleCloseFile}>Cancel</button>
-						<button className={styles.btn__proceed}>Identify</button>
+						<button className={styles.btn__proceed} onClick={handleIdentifyPlant}>Identify</button>
 					</div>
 				</section>
 			</div>

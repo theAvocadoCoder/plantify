@@ -59,6 +59,10 @@
         cursor: pointer;
     }
 
+    .hidden {
+        display: none !important;
+    }
+
     .bottom__layout {
         display: flex;
         justify-content: space-between;

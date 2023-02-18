@@ -18,17 +18,21 @@ const UploadBox = () => {
 
   function handleOnSelectFile(event) {
     const { files } = event.target;
-    const localImageURL = window.URL.createObjectURL(files[0]);
-    dispatch(setFile(localImageURL));
-    const convertSize = (numInBytes) => {
+    const [file] = files;
+    let reader = new FileReader();
+    reader.onloadend = function() {
+      dispatch(setFile(reader.result));
+    }
+    reader.readAsDataURL(file);
+    const formatSize = (numInBytes) => {
       if (numInBytes/1024 <= 1024) {
         return `${Math.floor(numInBytes/1024)}KB`;
       } else {
         return `${Math.floor(numInBytes/1024/1024)}MB`
       }
     }
-    dispatch(setSize(convertSize(files[0].size)));
-    dispatch(setName(files[0].name));
+    dispatch(setSize(formatSize(file.size)));
+    dispatch(setName(file.name));
   }
 
   return (
